@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: mainlb
-  namespace: three-tier
+  namespace: myecr
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
@@ -10,7 +10,7 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-    - host: backend.amanpathakdevops.study
+    - host: backend.myapplication.study
       http:
         paths:
           - path: /api
@@ -18,13 +18,12 @@ spec:
             backend:
               service:
                 name: api
-                port:   
-                  number: 3500
+                port:
+                  number: 8080
           - path: /
             pathType: Prefix
             backend:
               service:
                 name: frontend
-                port: 
-                  number: 3000
-      
+                port:
+                  number: 80
